@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load-In-Tech - Computer Shop (Hybrid Palette)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="LoadinTech.css">
+</head>
+<body class="bg-[#F6FFF8] font-sans">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-[#F6FFF8] to-[#EAF4F4] shadow-lg sticky top-0 z-50 border-b border-[#CCE3DE]">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-[#6B9080] rounded-lg flex items-center justify-center shadow-md">
+                        <span class="text-white font-bold text-xl">LT</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-[#6B9080]">Load-In-Tech</h1>
+                </div>
+                
+                <div class="flex items-center justify-center space-x-8 flex-1">
+                    <!-- Categories Dropdown -->
+                    <div class="relative group">
+                        <button class="text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors flex items-center space-x-1">
+                            <span>Categories</span>
+                            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-[#CCE3DE] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="p-6">
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-[#6B9080] mb-3">💻 Computing</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><button onclick="filterProducts('cpu')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Processors (CPU)</button></li>
+                                            <li><button onclick="filterProducts('gpu')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Graphics Cards</button></li>
+                                            <li><button onclick="filterProducts('motherboard')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Motherboards</button></li>
+                                            <li><button onclick="filterProducts('ram')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Memory (RAM)</button></li>
+                                            <li><button onclick="filterProducts('storage')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Storage (SSD/HDD)</button></li>
+                                            <li><button onclick="filterProducts('psu')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Power Supplies</button></li>
+                                            <li><button onclick="filterProducts('cooling')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Cooling Systems</button></li>
+                                            <li><button onclick="filterProducts('case')" class="text-gray-600 hover:text-[#6B9080] transition-colors">PC Cases</button></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-[#6B9080] mb-3">📱 Electronics</h4>
+                                        <ul class="space-y-2 text-sm">
+                                            <li><button onclick="filterProducts('laptop')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Laptops</button></li>
+                                            <li><button onclick="filterProducts('monitor')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Monitors</button></li>
+                                            <li><button onclick="filterProducts('keyboard')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Keyboards</button></li>
+                                            <li><button onclick="filterProducts('mouse')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Gaming Mice</button></li>
+                                            <li><button onclick="filterProducts('headset')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Headsets</button></li>
+                                            <li><button onclick="filterProducts('webcam')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Webcams</button></li>
+                                            <li><button onclick="filterProducts('speaker')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Speakers</button></li>
+                                            <li><button onclick="filterProducts('tablet')" class="text-gray-600 hover:text-[#6B9080] transition-colors">Tablets</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-[#CCE3DE]">
+                                    <button onclick="filterProducts('all')" class="w-full text-center text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">
+                                        View All Products →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Features -->
+                    <button onclick="showBrands()" class="text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">Brands</button>
+                    <button onclick="showDeals()" class="text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">Deals</button>
+                    <button onclick="showPCBuilder()" class="text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">PC Builder</button>
+                    <button onclick="showWishlist()" class="relative flex items-center space-x-2 text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">
+                        <img src="wishlist.png" alt="Cart" class="w-5 h-5" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"> 
+                        <span>Wishlist</span>
+                        <span id="wishlistCount" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button onclick="showCompare()" class="relative flex items-center space-x-2 text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors">
+                        <img src="scale-balance.png" alt="Cart" class="w-5 h-5" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"> 
+                        <span>Compare</span>
+                        <span id="compareCount" class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-5">
+                    <!-- Search -->
+                    <div class="relative group">
+                        <button class="text-[#6B9080] hover:text-[#A4C3B2] transition-colors p-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                        <!-- Search Box that appears on hover -->
+                        <div class="absolute top-full right-0 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="bg-white rounded-lg shadow-2xl border border-[#CCE3DE] p-4 w-80">
+                                <div class="relative">
+                                    <input type="text" id="searchInput" placeholder="Search products..." class="w-full px-4 py-2 pl-10 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] focus:border-transparent bg-white">
+                                    <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <div id="searchResults" class="mt-3 max-h-60 overflow-y-auto hidden">
+                                <!-- Search results will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart -->
+                    <button id="cartToggle" class="relative text-[#6B9080] hover:text-[#A4C3B2] transition-colors flex items-center space-x-2 font-medium">
+                        <img src="trolley-cart.png" alt="Cart" class="w-5 h-5" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                        <span style="display: none;"></span>
+                        <span>Cart</span>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <!-- Account -->
+                    <div class="relative group">
+                        <button class="text-[#6B9080] hover:text-[#A4C3B2] font-medium transition-colors flex items-center space-x-1">
+                            <span>👤 Account</span>
+                            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-[#CCE3DE] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <div class="p-4">
+                                <ul class="space-y-2 text-sm">
+                                    <li><button onclick="showLogin()" class="w-full text-left text-gray-600 hover:text-[#6B9080] transition-colors py-1">🔐 Login</button></li>
+                                    <li><button onclick="showRegister()" class="w-full text-left text-gray-600 hover:text-[#6B9080] transition-colors py-1">📝 Register</button></li>
+                                    <li><button onclick="showOrders()" class="w-full text-left text-gray-600 hover:text-[#6B9080] transition-colors py-1">📦 My Orders</button></li>
+                                    <li><button onclick="showProfile()" class="w-full text-left text-gray-600 hover:text-[#6B9080] transition-colors py-1">⚙️ Settings</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] text-white py-24">
+        <div class="floating-shapes">
+            <div class="floating-shape text-6xl" style="left: 10%; animation-duration: 25s;">💻</div>
+            <div class="floating-shape text-5xl" style="left: 20%; animation-duration: 30s;">🖥️</div>
+            <div class="floating-shape text-4xl" style="left: 70%; animation-duration: 20s;">⚡</div>
+            <div class="floating-shape text-5xl" style="left: 80%; animation-duration: 35s;">🔧</div>
+        </div>
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-6xl font-bold mb-6">Premium Computer Hardware</h2>
+            <p class="text-2xl mb-10 text-[#F6FFF8]">Build your dream PC with our high-quality components</p>
+            <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" 
+                    class="bg-white text-[#6B9080] px-10 py-4 rounded-full font-bold text-lg hover:bg-[#F6FFF8] transform hover:scale-105 transition-all duration-300 shadow-2xl">
+                🚀 Shop Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Quick Category Navigation -->
+    <section class="bg-gradient-to-r from-[#F6FFF8] via-[#EAF4F4] to-[#CCE3DE] py-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-[#6B9080] mb-4">Shop by Category</h2>
+                <p class="text-gray-600">Find exactly what you need for your perfect build</p>
+            </div>
+            
+            <!-- Quick Category Filters -->
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="showFullCatalog('all')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg hover:bg-[#A4C3B2] transition-colors shadow-md font-semibold">
+                    🛍️ All Products
+                </button>
+                <button onclick="showFullCatalog('cpu')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg hover:bg-[#A4C3B2] transition-colors shadow-md font-semibold">
+                    🔧 Processors
+                </button>
+                <button onclick="showFullCatalog('gpu')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg hover:bg-[#A4C3B2] transition-colors shadow-md font-semibold">
+                    🎮 Graphics Cards
+                </button>
+                <button onclick="showFullCatalog('ram')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg hover:bg-[#A4C3B2] transition-colors shadow-md font-semibold">
+                    💾 Memory
+                </button>
+                <button onclick="showFullCatalog('storage')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg hover:bg-[#A4C3B2] transition-colors shadow-md font-semibold">
+                    💿 Storage
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flash Sale Section -->
+    <section id="flash" class="bg-gradient-to-r from-red-600 to-red-700 py-16 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold mb-4">⚡ Flash Sale</h2>
+                <p class="text-xl mb-6">Limited time offers - Up to 40% off premium components!</p>
+                <div id="flashTimer" class="flex justify-center items-center space-x-4">
+                    <div class="bg-white text-red-600 px-4 py-2 rounded-lg shadow-lg">
+                        <div class="text-2xl font-bold" id="hours">23</div>
+                        <div class="text-xs">HOURS</div>
+                    </div>
+                    <div class="text-2xl">:</div>
+                    <div class="bg-white text-red-600 px-4 py-2 rounded-lg shadow-lg">
+                        <div class="text-2xl font-bold" id="minutes">45</div>
+                        <div class="text-xs">MINUTES</div>
+                    </div>
+                    <div class="text-2xl">:</div>
+                    <div class="bg-white text-red-600 px-4 py-2 rounded-lg shadow-lg">
+                        <div class="text-2xl font-bold" id="seconds">30</div>
+                        <div class="text-xs">SECONDS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="flashProducts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Flash sale products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Showcase -->
+    <main id="products" class="py-16 bg-gradient-to-br from-[#F6FFF8] via-[#EAF4F4] to-[#CCE3DE]">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h3 class="text-4xl font-bold text-[#6B9080] mb-2">Featured Products</h3>
+                    <p class="text-gray-600">Discover our most popular components</p>
+                </div>
+                <button onclick="showFullCatalog('all')" class="bg-[#6B9080] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#A4C3B2] transition-colors shadow-md">
+                    View All Products →
+                </button>
+            </div>
+            
+            <!-- Horizontal Scrolling Product Container -->
+            <div class="relative">
+                <!-- Left Scroll Button -->
+                <button id="scrollLeft" onclick="scrollProducts('left')" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 border border-[#CCE3DE]">
+                    <svg class="w-6 h-6 text-[#6B9080]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                
+                <!-- Right Scroll Button -->
+                <button id="scrollRight" onclick="scrollProducts('right')" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-300 hover:scale-110 border border-[#CCE3DE]">
+                    <svg class="w-6 h-6 text-[#6B9080]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                
+                <!-- Scrollable Product Container -->
+                <div id="productScroller" class="overflow-x-auto scrollbar-hide scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    <div id="productGrid" class="flex space-x-6 pb-4" style="width: max-content;">
+                        <!-- Featured products will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="bg-gradient-to-r from-[#F6FFF8] via-[#EAF4F4] to-[#CCE3DE] py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-[#6B9080]">Why Choose Load-In-Tech?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="text-6xl mb-4">🚚</div>
+                    <h3 class="text-xl font-bold mb-4 text-[#6B9080]">Free Shipping</h3>
+                    <p class="text-gray-600">Free shipping on all orders over $100. Fast and reliable delivery nationwide.</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="text-6xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold mb-4 text-[#6B9080]">2-Year Warranty</h3>
+                    <p class="text-gray-600">Comprehensive warranty coverage on all products with 24/7 customer support.</p>
+                </div>
+                <div class="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="text-6xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-4 text-[#6B9080]">Expert Support</h3>
+                    <p class="text-gray-600">Get help from our certified technicians for installation and troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gaming Setup Showcase Section -->
+    <section class="py-16 bg-gradient-to-br from-[#6B9080] via-[#A4C3B2] to-[#CCE3DE]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold text-white mb-4">🎮 Gaming Setup Showcase</h2>
+                <p class="text-xl text-[#F6FFF8]">Complete gaming builds professionally assembled and tested</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Budget Gaming Build -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-white text-center">
+                        <div class="text-6xl mb-4">💰</div>
+                        <h3 class="text-2xl font-bold mb-2">Budget Gamer</h3>
+                        <div class="text-4xl font-bold mb-2">$899</div>
+                        <div class="text-sm opacity-90">Perfect for 1080p gaming</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">AMD Ryzen 5 7600X</span>
+                                <span class="font-semibold">$229</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">NVIDIA RTX 4060</span>
+                                <span class="font-semibold">$299</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">16GB DDR5-5600</span>
+                                <span class="font-semibold">$89</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">1TB NVMe SSD</span>
+                                <span class="font-semibold">$79</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">B650 Motherboard</span>
+                                <span class="font-semibold">$129</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">650W PSU + Case</span>
+                                <span class="font-semibold">$158</span>
+                            </div>
+                            <div class="border-t pt-2 flex justify-between font-bold">
+                                <span>Individual Total:</span>
+                                <span class="text-gray-500 line-through">$983</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-green-600">
+                                <span>Bundle Price:</span>
+                                <span>$899</span>
+                            </div>
+                            <div class="text-center text-sm text-green-600 font-semibold">Save $84!</div>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="showSetupDetails('budget')" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                📋 View Details
+                            </button>
+                            <button onclick="addSetupToCart('budget')" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                🛒 Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Gaming Build -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300 border-4 border-blue-400">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white text-center relative">
+                        <div class="absolute top-2 right-2 bg-yellow-400 text-blue-800 px-2 py-1 rounded-full text-xs font-bold">POPULAR</div>
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-2xl font-bold mb-2">Performance Pro</h3>
+                        <div class="text-4xl font-bold mb-2">$1,599</div>
+                        <div class="text-sm opacity-90">Excellent for 1440p gaming</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">AMD Ryzen 7 7700X</span>
+                                <span class="font-semibold">$349</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">NVIDIA RTX 4070 Ti</span>
+                                <span class="font-semibold">$799</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">32GB DDR5-6000</span>
+                                <span class="font-semibold">$179</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">2TB NVMe SSD</span>
+                                <span class="font-semibold">$149</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">X670 Motherboard</span>
+                                <span class="font-semibold">$229</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">850W PSU + Case</span>
+                                <span class="font-semibold">$228</span>
+                            </div>
+                            <div class="border-t pt-2 flex justify-between font-bold">
+                                <span>Individual Total:</span>
+                                <span class="text-gray-500 line-through">$1,933</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-blue-600">
+                                <span>Bundle Price:</span>
+                                <span>$1,599</span>
+                            </div>
+                            <div class="text-center text-sm text-blue-600 font-semibold">Save $334!</div>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="showSetupDetails('performance')" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                📋 View Details
+                            </button>
+                            <button onclick="addSetupToCart('performance')" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                🛒 Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ultimate Gaming Build -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white text-center">
+                        <div class="text-6xl mb-4">👑</div>
+                        <h3 class="text-2xl font-bold mb-2">Ultimate Beast</h3>
+                        <div class="text-4xl font-bold mb-2">$3,299</div>
+                        <div class="text-sm opacity-90">4K gaming & content creation</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Intel Core i9-13900K</span>
+                                <span class="font-semibold">$589</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">NVIDIA RTX 4090</span>
+                                <span class="font-semibold">$1,599</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">64GB DDR5-6400</span>
+                                <span class="font-semibold">$399</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">4TB NVMe SSD</span>
+                                <span class="font-semibold">$299</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Z790 Motherboard</span>
+                                <span class="font-semibold">$349</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">1000W PSU + Case</span>
+                                <span class="font-semibold">$348</span>
+                            </div>
+                            <div class="border-t pt-2 flex justify-between font-bold">
+                                <span>Individual Total:</span>
+                                <span class="text-gray-500 line-through">$3,583</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-purple-600">
+                                <span>Bundle Price:</span>
+                                <span>$3,299</span>
+                            </div>
+                            <div class="text-center text-sm text-purple-600 font-semibold">Save $284!</div>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="showSetupDetails('ultimate')" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                📋 View Details
+                            </button>
+                            <button onclick="addSetupToCart('ultimate')" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                                🛒 Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Showcase Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#6B9080] mb-4">🏢 Premium Brand Partners</h2>
+                <p class="text-gray-600">Shop from the world's leading technology brands</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <button onclick="filterByBrand('Intel')" class="group bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-200 hover:border-blue-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔵</div>
+                    <h3 class="font-bold text-blue-700 mb-2">Intel</h3>
+                    <p class="text-xs text-blue-600">8 products</p>
+                </button>
+                
+                <button onclick="filterByBrand('AMD')" class="group bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-red-200 hover:border-red-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔴</div>
+                    <h3 class="font-bold text-red-700 mb-2">AMD</h3>
+                    <p class="text-xs text-red-600">6 products</p>
+                </button>
+                
+                <button onclick="filterByBrand('NVIDIA')" class="group bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-green-200 hover:border-green-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🟢</div>
+                    <h3 class="font-bold text-green-700 mb-2">NVIDIA</h3>
+                    <p class="text-xs text-green-600">4 products</p>
+                </button>
+                
+                <button onclick="filterByBrand('Corsair')" class="group bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-yellow-200 hover:border-yellow-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🟡</div>
+                    <h3 class="font-bold text-yellow-700 mb-2">Corsair</h3>
+                    <p class="text-xs text-yellow-600">3 products</p>
+                </button>
+                
+                <button onclick="filterByBrand('ASUS')" class="group bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-purple-200 hover:border-purple-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🟣</div>
+                    <h3 class="font-bold text-purple-700 mb-2">ASUS</h3>
+                    <p class="text-xs text-purple-600">2 products</p>
+                </button>
+                
+                <button onclick="filterByBrand('Samsung')" class="group bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-indigo-200 hover:border-indigo-400">
+                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔵</div>
+                    <h3 class="font-bold text-indigo-700 mb-2">Samsung</h3>
+                    <p class="text-xs text-indigo-600">3 products</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech News & Blog Section -->
+    <section class="py-16 bg-gradient-to-br from-[#F6FFF8] via-[#EAF4F4] to-[#CCE3DE]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#6B9080] mb-4">📰 Tech News & Guides</h2>
+                <p class="text-gray-600">Stay updated with the latest in PC hardware and gaming</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 p-4">
+                        <div class="flex items-center justify-between text-white">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">Hardware News</span>
+                            <span class="text-sm opacity-90">Dec 15, 2024</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-6xl mb-4 text-center">🚀</div>
+                        <h3 class="text-xl font-bold text-[#6B9080] mb-3">NVIDIA RTX 5000 Series: What to Expect</h3>
+                        <p class="text-gray-600 mb-4 text-sm">The next generation of graphics cards promises unprecedented performance gains with new architecture improvements and AI capabilities.</p>
+                        <div class="flex items-center justify-between">
+                            <button onclick="showArticle('rtx5000')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm">
+                                Read More →
+                            </button>
+                            <span class="text-xs text-gray-500">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4">
+                        <div class="flex items-center justify-between text-white">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">Build Guide</span>
+                            <span class="text-sm opacity-90">Dec 12, 2024</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-6xl mb-4 text-center">🔧</div>
+                        <h3 class="text-xl font-bold text-[#6B9080] mb-3">First-Time PC Builder's Complete Guide</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Step-by-step instructions for building your first gaming PC, from component selection to final assembly and testing.</p>
+                        <div class="flex items-center justify-between">
+                            <button onclick="showArticle('buildguide')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                Read More →
+                            </button>
+                            <span class="text-xs text-gray-500">12 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 p-4">
+                        <div class="flex items-center justify-between text-white">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">Performance Tips</span>
+                            <span class="text-sm opacity-90">Dec 10, 2024</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-6xl mb-4 text-center">⚡</div>
+                        <h3 class="text-xl font-bold text-[#6B9080] mb-3">Optimize Your PC for Maximum Gaming Performance</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Learn professional techniques to squeeze every frame from your gaming rig with software tweaks and hardware optimizations.</p>
+                        <div class="flex items-center justify-between">
+                            <button onclick="showArticle('optimization')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                                Read More →
+                            </button>
+                            <span class="text-xs text-gray-500">8 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#6B9080] mb-4">🛠️ Professional Services</h2>
+                <p class="text-gray-600">Expert services to get the most out of your hardware</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- PC Assembly Service -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-blue-200">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🔧</div>
+                        <h3 class="text-xl font-bold text-blue-700 mb-2">PC Assembly</h3>
+                        <div class="text-3xl font-bold text-blue-600 mb-3">$99</div>
+                        <p class="text-sm text-blue-600 mb-4">Professional assembly of your custom PC build with cable management and testing</p>
+                        <ul class="text-xs text-blue-600 mb-6 space-y-1">
+                            <li>✓ Expert component installation</li>
+                            <li>✓ Professional cable management</li>
+                            <li>✓ System testing & optimization</li>
+                            <li>✓ 30-day assembly warranty</li>
+                        </ul>
+                        <button onclick="addServiceToCart('assembly')" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Add Service
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Performance Tuning Service -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-green-200">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold text-green-700 mb-2">Performance Tuning</h3>
+                        <div class="text-3xl font-bold text-green-600 mb-3">$79</div>
+                        <p class="text-sm text-green-600 mb-4">Optimize your system for maximum gaming and productivity performance</p>
+                        <ul class="text-xs text-green-600 mb-6 space-y-1">
+                            <li>✓ CPU & GPU overclocking</li>
+                            <li>✓ Memory timing optimization</li>
+                            <li>✓ Thermal management setup</li>
+                            <li>✓ Performance benchmarking</li>
+                        </ul>
+                        <button onclick="addServiceToCart('tuning')" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                            Add Service
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Extended Warranty Service -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-purple-200">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold text-purple-700 mb-2">Extended Warranty</h3>
+                        <div class="text-3xl font-bold text-purple-600 mb-3">$149</div>
+                        <p class="text-sm text-purple-600 mb-4">Comprehensive 3-year coverage beyond manufacturer warranty</p>
+                        <ul class="text-xs text-purple-600 mb-6 space-y-1">
+                            <li>✓ 3-year comprehensive coverage</li>
+                            <li>✓ Free repairs & replacements</li>
+                            <li>✓ Priority technical support</li>
+                            <li>✓ No deductible or hidden fees</li>
+                        </ul>
+                        <button onclick="addServiceToCart('warranty')" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                            Add Service
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Home Setup Service -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-orange-200">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🏠</div>
+                        <h3 class="text-xl font-bold text-orange-700 mb-2">Home Setup</h3>
+                        <div class="text-3xl font-bold text-orange-600 mb-3">$199</div>
+                        <p class="text-sm text-orange-600 mb-4">Complete in-home installation and setup service</p>
+                        <ul class="text-xs text-orange-600 mb-6 space-y-1">
+                            <li>✓ In-home installation service</li>
+                            <li>✓ Peripheral setup & configuration</li>
+                            <li>✓ Software installation & updates</li>
+                            <li>✓ User training & support</li>
+                        </ul>
+                        <button onclick="addServiceToCart('homesetup')" class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition-colors">
+                            Add Service
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="bg-gradient-to-br from-[#6B9080] via-[#A4C3B2] to-[#CCE3DE] py-16 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#6B9080]/80 via-[#A4C3B2]/60 to-[#CCE3DE]/40"></div>
+        <div class="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-white/20 to-[#F6FFF8]/30 rounded-full blur-xl"></div>
+        <div class="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-tl from-[#EAF4F4]/20 to-white/10 rounded-full blur-2xl"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl font-bold text-white mb-4">Stay Updated</h2>
+            <p class="text-xl text-[#F6FFF8] mb-8">Get the latest deals and tech news delivered to your inbox</p>
+            <div class="max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Enter your email" 
+                       class="flex-1 px-4 py-3 rounded-lg border-2 border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:border-white backdrop-blur-sm">
+                <button class="bg-gradient-to-r from-[#2D5016] to-[#6B9080] text-white px-6 py-3 rounded-lg font-semibold hover:from-[#6B9080] hover:to-[#A4C3B2] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">What Our Customers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-white border border-white/20">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">👨‍💻</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Alex Chen</h4>
+                            <div class="text-yellow-300">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90">"Amazing quality components! Built my dream gaming rig with Load-In-Tech parts. The RTX 4080 runs like a beast!"</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-white border border-white/20">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">👩‍🔬</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <div class="text-yellow-300">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90">"Fast shipping and excellent customer support. The warranty service is outstanding. Highly recommended!"</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-white border border-white/20">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-2xl">👨‍🎨</div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Mike Rodriguez</h4>
+                            <div class="text-yellow-300">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90">"Perfect for content creation! The Ryzen 9 handles 4K video editing like a champ. Great prices too!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-slide fixed right-0 top-0 h-full w-120 bg-gradient-to-b from-white via-[#F6FFF8] to-[#EAF4F4] shadow-2xl z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent">Shopping Cart</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
+            </div>
+            
+            <div id="cartItems" class="space-y-4 mb-6">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            
+            <div class="border-t border-[#CCE3DE] pt-4">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-bold">Total:</span>
+                    <span id="cartTotal" class="text-2xl font-bold bg-gradient-to-r from-[#2D5016] to-[#6B9080] bg-clip-text text-transparent">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-gradient-to-r from-[#2D5016] via-[#6B9080] to-[#A4C3B2] text-white py-3 rounded-lg font-semibold hover:from-[#6B9080] hover:via-[#A4C3B2] hover:to-[#CCE3DE] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl disabled:bg-gray-400 disabled:transform-none disabled:shadow-none" disabled>
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+        <span id="notificationText">Item added to cart!</span>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-gradient-to-br from-white via-[#F6FFF8] to-[#EAF4F4] py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent">Get In Touch</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Info -->
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-white to-[#F6FFF8] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-[#CCE3DE]">
+                        <div class="w-12 h-12 bg-gradient-to-br from-[#6B9080] to-[#A4C3B2] rounded-lg flex items-center justify-center text-white text-xl shadow-lg">📍</div>
+                        <div>
+                            <h3 class="text-lg font-bold bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent mb-1">Visit Our Store</h3>
+                            <p class="text-gray-600 text-sm">123 Tech Street, Silicon Valley<br>CA 94000, United States</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-white to-[#F6FFF8] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-[#CCE3DE]">
+                        <div class="w-12 h-12 bg-gradient-to-br from-[#6B9080] to-[#A4C3B2] rounded-lg flex items-center justify-center text-white text-xl shadow-lg">📞</div>
+                        <div>
+                            <h3 class="text-lg font-bold bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent mb-1">Call Us</h3>
+                            <p class="text-gray-600 text-sm">+1 (555) 123-4567<br>Mon-Fri: 9AM-6PM PST</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-white to-[#F6FFF8] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-[#CCE3DE]">
+                        <div class="w-12 h-12 bg-gradient-to-br from-[#6B9080] to-[#A4C3B2] rounded-lg flex items-center justify-center text-white text-xl shadow-lg">📧</div>
+                        <div>
+                            <h3 class="text-lg font-bold bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent mb-1">Email Us</h3>
+                            <p class="text-gray-600 text-sm">info@Load-In-Tech.com<br>support@Load-In-Tech.com</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="bg-gradient-to-br from-[#6B9080] to-[#A4C3B2] p-6 rounded-xl text-white shadow-lg">
+                        <h3 class="text-lg font-bold mb-4">Why Customers Love Us</h3>
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div class="text-2xl font-bold">50K+</div>
+                                <div class="text-sm text-[#CCE3DE]">Happy Customers</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">24/7</div>
+                                <div class="text-sm text-[#CCE3DE]">Support</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">99%</div>
+                                <div class="text-sm text-[#CCE3DE]">Satisfaction</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">2-Day</div>
+                                <div class="text-sm text-[#CCE3DE]">Delivery</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-gradient-to-br from-white via-[#F6FFF8] to-[#EAF4F4] p-6 rounded-xl shadow-lg border border-[#CCE3DE] hover:shadow-xl transition-all duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] bg-clip-text text-transparent mb-2">Send us a Message</h3>
+                        <p class="text-gray-600 text-sm">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    </div>
+                    
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="relative">
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe"
+                                       class="w-full px-3 py-2 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] focus:border-transparent bg-white transition-all duration-200 hover:border-[#A4C3B2]">
+                            </div>
+                            <div class="relative">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="john@example.com"
+                                       class="w-full px-3 py-2 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] focus:border-transparent bg-white transition-all duration-200 hover:border-[#A4C3B2]">
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                            <select id="subject" name="subject" required
+                                    class="w-full px-3 py-2 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] focus:border-transparent bg-white transition-all duration-200 hover:border-[#A4C3B2]">
+                                <option value="">Choose a topic...</option>
+                                <option value="general">💬 General Inquiry</option>
+                                <option value="support">🔧 Technical Support</option>
+                                <option value="order">📦 Order Status</option>
+                                <option value="warranty">🛡️ Warranty Claim</option>
+                                <option value="partnership">🤝 Partnership</option>
+                            </select>
+                        </div>
+                        
+                        <div class="relative">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="3" required placeholder="Tell us how we can help you..."
+                                      class="w-full px-3 py-2 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] focus:border-transparent bg-white resize-none transition-all duration-200 hover:border-[#A4C3B2]"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-[#2D5016] via-[#6B9080] to-[#A4C3B2] text-white py-3 rounded-lg font-semibold hover:from-[#6B9080] hover:via-[#A4C3B2] hover:to-[#CCE3DE] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                            <span>✉️</span>
+                            <span>Send Message</span>
+                        </button>
+                        
+                        <p class="text-xs text-gray-500 text-center mt-3">
+                            We typically respond within 2-4 hours during business hours
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Chat Widget -->
+    <div id="chatWidget" class="fixed bottom-6 right-6 z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl border border-[#CCE3DE] w-80 h-96 flex flex-col">
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] text-white p-4 rounded-t-xl flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <span class="text-sm">🎧</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">Load-In-Tech Support</h4>
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span class="text-xs opacity-90">Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-white/80 hover:text-white text-xl">×</button>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gradient-to-b from-[#F6FFF8] to-white">
+                <div class="flex items-start space-x-2">
+                    <div class="w-6 h-6 bg-[#6B9080] rounded-full flex items-center justify-center text-white text-xs">
+                        T
+                    </div>
+                    <div class="bg-white rounded-lg p-3 shadow-sm border border-[#CCE3DE] max-w-xs">
+                        <p class="text-sm">Hi! Welcome to Load-In-Tech! How can I help you today? 😊</p>
+                        <span class="text-xs text-gray-500">Just now</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Input -->
+            <div class="p-4 border-t border-[#CCE3DE] bg-white rounded-b-xl">
+                <div class="flex space-x-2">
+                    <input type="text" id="chatInput" placeholder="Type your message..." 
+                           class="flex-1 px-3 py-2 border border-[#CCE3DE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9080] text-sm"
+                           onkeypress="handleChatKeyPress(event)">
+                    <button onclick="sendMessage()" 
+                            class="bg-[#6B9080] text-white px-4 py-2 rounded-lg hover:bg-[#A4C3B2] transition-colors">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="mt-2 flex flex-wrap gap-1">
+                    <button onclick="sendQuickMessage('I need help with my order')" 
+                            class="text-xs bg-[#F6FFF8] text-[#6B9080] px-2 py-1 rounded-full hover:bg-[#EAF4F4] transition-colors">
+                        📦 Order Help
+                    </button>
+                    <button onclick="sendQuickMessage('I have a technical question')" 
+                            class="text-xs bg-[#F6FFF8] text-[#6B9080] px-2 py-1 rounded-full hover:bg-[#EAF4F4] transition-colors">
+                        🔧 Tech Support
+                    </button>
+                    <button onclick="sendQuickMessage('I want to return an item')" 
+                            class="text-xs bg-[#F6FFF8] text-[#6B9080] px-2 py-1 rounded-full hover:bg-[#EAF4F4] transition-colors">
+                        🔄 Returns
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Floating Button (when chat is closed) -->
+    <div id="chatFloatingBtn" class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChat()" 
+                class="bg-gradient-to-r from-[#6B9080] to-[#A4C3B2] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center">
+            <span class="text-2xl">💬</span>
+            <span id="chatBadge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#6B9080] text-white py-12 mt-0">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Load-In-Tech</h4>
+                    <p class="text-[#CCE3DE]">Your trusted partner for premium computer hardware and components.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-[#CCE3DE]">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-[#CCE3DE]">
+                        <li><a href="#" class="hover:text-white">Processors</a></li>
+                        <li><a href="#" class="hover:text-white">Graphics Cards</a></li>
+                        <li><a href="#" class="hover:text-white">Memory & Storage</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <p class="text-[#CCE3DE]">📧 info@Load-In-Tech.com</p>
+                    <p class="text-[#CCE3DE]">📞 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="border-t border-[#A4C3B2] mt-8 pt-8 text-center text-[#CCE3DE]">
+                <p>&copy; 2024 Load-In-Tech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="LoadinTech.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'992b68f002f5f257',t:'MTc2MTE2MTQzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>

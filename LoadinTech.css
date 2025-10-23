@@ -1,0 +1,79 @@
+body {
+    box-sizing: border-box;
+}
+
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cart-slide {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.cart-slide.open {
+    transform: translateX(0);
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.gradient-text {
+    color: #6B9080;
+}
+
+/* Hide scrollbar for horizontal product scroller */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Product card sizing for horizontal scroll */
+.product-card-horizontal {
+    min-width: 280px;
+    max-width: 280px;
+    flex-shrink: 0;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.floating-shape {
+    position: absolute;
+    opacity: 0.2;
+    animation: float 20s infinite linear;
+}
+
+.floating-shape:nth-child(1) { animation-delay: 0s; }
+.floating-shape:nth-child(2) { animation-delay: -5s; }
+.floating-shape:nth-child(3) { animation-delay: -10s; }
+.floating-shape:nth-child(4) { animation-delay: -15s; }
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-100px) rotate(360deg); }
+}
